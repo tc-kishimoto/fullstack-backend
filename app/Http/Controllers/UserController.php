@@ -22,8 +22,12 @@ class UserController extends Controller
 
             // return redirect()->intended('dashboard');
             $user = User::where('email', $request->email)->first();
+            $token = $request->user()->createToken('my-app-token');
 
-            return response($user, 200);
+            return response([
+                'user' => $user,
+                'token' => $token->plainTextToken
+            ], 200);
         }
 
         return response([
