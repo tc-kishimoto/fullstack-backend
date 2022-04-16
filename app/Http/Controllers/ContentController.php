@@ -10,7 +10,7 @@ class ContentController extends Controller
 {
     public function search(Request $request)
     {
-        $result = SearchContent::select('category', 'title', DB::raw("substring(content, locate('Java', content) - 50, 100) excerpt"))
+        $result = SearchContent::select('category', 'title', DB::raw("substring(content, 1, 100) excerpt"))
         ->where('content', 'like', '%' . $request->keyword . '%')
         ->orderBy('category')
         ->orderBy('title')

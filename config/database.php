@@ -93,12 +93,12 @@ return [
 
         'mongodb' => [
             'driver' => 'mongodb',
-            'dsn' => env('MONGODB_DSN'),
+            // 'dsn' => env('MONGODB_DSN'),
             'database' => env('MONGODB_DATABASE', 'fullstack'),
-            // 'host' => env('MONGODB_HOST', '127.0.0.1'),
-            // 'port' => env('MONGODB_PORT', 27017),
-            // 'username' => env('MONGODB_USERNAME', 'homestead'),
-            // 'password' => env('MONGODB_PASSWORD', 'secret'),
+            'host' => env('MONGODB_HOST', '127.0.0.1'),
+            'port' => env('MONGODB_PORT', 27017),
+            'username' => env('MONGODB_USERNAME', 'homestead'),
+            'password' => env('MONGODB_PASSWORD', 'secret'),
             // 'options' => [
                 // 'database' => env('DB_AUTHENTICATION_DATABASE', 'admin'), // required with Mongo 3+
             // ],

@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class SearchContent extends Model
 {
-    // use HasFactory;
-    protected $connection = 'mongodb';
-    protected $collection = 'markdowns';
-    protected $primaryKey = 'id';
+    use HasFactory;
+    // protected $connection = 'mongodb';
+    // protected $collection = 'markdowns';
+    // protected $primaryKey = 'id';
 }
