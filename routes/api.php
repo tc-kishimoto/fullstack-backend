@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\ProgressController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,8 @@ use App\Http\Controllers\ContentController;
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/newUser', [UserController::class, 'create']);
+    Route::get('getProgress', [ProgressController::class, 'getProgress']);
+    Route::post('updateProgress', [ProgressController::class, 'updateProgress']);
 });
 
 Route::post('/login', [UserController::class, 'login']);
