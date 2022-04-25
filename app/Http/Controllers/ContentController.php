@@ -10,11 +10,17 @@ class ContentController extends Controller
 {
     public function search(Request $request)
     {
-        $result = SearchContent::select('category', 'title', DB::raw("substring(content, 1, 100) excerpt"))
+        $result = SearchContent::select('category', 'title'
+            , DB::raw("substring(content,
+            case
+                when instr(content, '$request->keyword') - 50 < 0 then instr(content, '$request->keyword')
+                else instr(content, '$request->keyword') - 50
+            end
+            , instr(content, '$request->keyword') + 50) excerpt"))
         ->where('content', 'like', '%' . $request->keyword . '%')
         ->orderBy('category')
         ->orderBy('title')
-        ->limit(20)
+        // ->limit(20)
         ->get();
 
         return response($result, 200);
