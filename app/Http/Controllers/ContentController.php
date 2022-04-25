@@ -16,7 +16,7 @@ class ContentController extends Controller
                 when instr(content, '$request->keyword') - 50 < 0 then instr(content, '$request->keyword')
                 else instr(content, '$request->keyword') - 50
             end
-            , instr(content, '$request->keyword') + 50) excerpt"))
+            , 100) excerpt"))
         ->where('content', 'like', '%' . $request->keyword . '%')
         ->orderBy('category')
         ->orderBy('title')
