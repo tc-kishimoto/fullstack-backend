@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     function login(Request $request) {
-        // Log::debug($request);
+        Log::debug($request);
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
@@ -36,6 +36,12 @@ class UserController extends Controller
         // return back()->withErrors([
         //     'email' => 'The provided credentials do not match our records.',
         // ]);
+    }
+
+    public function logout(Request $request)
+    {
+        // トークンの削除
+        $request->user()->currentAccessToken()->delete();
     }
 
     function create(Request $request) {
