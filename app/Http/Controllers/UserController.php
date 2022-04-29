@@ -52,14 +52,22 @@ class UserController extends Controller
     }
 
     function create(Request $request) {
+        // Log::debug($request);
         $validated = $request->validate([
-            'email' => ['required', 'email'],
+            'name' => ['required'],
+            'email' => ['required', 'email', 'unique:users'],
+            'login_id' => ['required', 'unique:users'],
+            'role' => ['required'],
             'password' => ['required'],
         ]);
+        // Log::debug($validated);
         $user = User::create([
             'name' => $request->name,
+            'login_id' => $request->login_id,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+            'company_id' => $request->company_id,
         ]);
         return response($user, 200);
     }
