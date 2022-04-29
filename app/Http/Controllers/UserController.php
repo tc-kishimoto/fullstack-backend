@@ -11,23 +11,30 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     function login(Request $request) {
-        Log::debug($request);
+        // Log::debug($request);
+        if(strpos($request->email, '@')) {
+            $rule = ['required', 'email'];
+            $column = 'email';
+        } else {
+            $rule = 'required';
+            $column = 'login_id';
+        }
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'email' => $rule,
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
-            // $request->session()->regenerate();
+        if ($column === 'email' && Auth::attempt($credentials) || $column === 'login_id') {
+            $user = User::where($column, $request->email)->first();
+            if($user) {
+                // $token = $request->user()->createToken('my-app-token');
+                $token = $user->createToken('my-app-token');
 
-            // return redirect()->intended('dashboard');
-            $user = User::where('email', $request->email)->first();
-            $token = $request->user()->createToken('my-app-token');
-
-            return response([
-                'user' => $user,
-                'token' => $token->plainTextToken
-            ], 200);
+                return response([
+                    'user' => $user,
+                    'token' => $token->plainTextToken
+                ], 200);
+            }
         }
 
         return response([
