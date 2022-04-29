@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('password');
             $table->integer('role')->nullable();
             $table->integer('company_id')->nullable();
-            $table->string('icon_path');
+            $table->string('icon_path')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
