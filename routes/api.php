@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\CourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [UserController::class, 'logout']);
     Route::get('/searchUser', [UserController::class, 'search']);
     Route::get('/searchCompany', [CompanyController::class, 'search']);
+    Route::get('/searchCourse', [CourseController::class, 'search']);
 });
 
 Route::post('/login', [UserController::class, 'login']);
