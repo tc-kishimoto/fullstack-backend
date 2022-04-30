@@ -4,13 +4,24 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    function login(Request $request) {
+    public function search(Request $request) {
+        $result = User::select("name"
+            , DB::raw("icon_path img_path")
+            , DB::raw("name explanation")
+            )
+        ->where(DB::raw("concat(name, login_id, email)"), "like", '%' . $request->keyword . '%')
+        ->get();
+        return response($result, 200);
+    }
+
+    public function login(Request $request) {
         // Log::debug($request);
         if(strpos($request->email, '@')) {
             $rule = ['required', 'email'];

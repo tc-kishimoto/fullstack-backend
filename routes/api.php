@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('getProgress', [ProgressController::class, 'getProgress']);
     Route::post('updateProgress', [ProgressController::class, 'updateProgress']);
     Route::post('/logout', [UserController::class, 'logout']);
+    Route::get('/searchUser', [UserController::class, 'search']);
 });
 
 Route::post('/login', [UserController::class, 'login']);
