@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\ProgressController;
+use App\Http\Controllers\CompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('updateProgress', [ProgressController::class, 'updateProgress']);
     Route::post('/logout', [UserController::class, 'logout']);
     Route::get('/searchUser', [UserController::class, 'search']);
+    Route::get('/searchCompany', [CompanyController::class, 'search']);
 });
 
 Route::post('/login', [UserController::class, 'login']);
