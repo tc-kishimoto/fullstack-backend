@@ -21,6 +21,7 @@ use App\Http\Controllers\CourseController;
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/newUser', [UserController::class, 'create']);
+    Route::post('/newCompany', [CompanyController::class, 'create']);
     Route::get('getProgress', [ProgressController::class, 'getProgress']);
     Route::post('updateProgress', [ProgressController::class, 'updateProgress']);
     Route::post('/logout', [UserController::class, 'logout']);
