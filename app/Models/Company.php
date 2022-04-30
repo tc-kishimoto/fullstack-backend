@@ -17,5 +17,6 @@ class Company extends Model
     protected $fillable = [
         'name',
         'short_name',
+        'URL',
     ];
 }
