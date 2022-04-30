@@ -14,6 +14,8 @@ class UserController extends Controller
     public function search(Request $request) {
         $result = User::select("name"
             , DB::raw("icon_path img_path")
+            , DB::raw("name link")
+            , DB::raw("name link_title")
             , DB::raw("name explanation")
             )
         ->where(DB::raw("concat(name, login_id, email)"), "like", '%' . $request->keyword . '%')
