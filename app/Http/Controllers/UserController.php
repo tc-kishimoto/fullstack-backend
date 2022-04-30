@@ -76,6 +76,7 @@ class UserController extends Controller
         // Log::debug($validated);
         $user = User::create([
             'name' => $request->name,
+            'name_kana' => $request->name_kana,
             'login_id' => $request->login_id,
             'email' => $request->email,
             'password' => Hash::make($request->password),
