@@ -12,10 +12,10 @@ class ProgressController extends Controller
         $progress = Progress::where('user_id', $request->user()->id)
         ->where('category', $request->category)
         ->where('title', $request->title)
-        ->first()->progress;
+        ->first();
 
         return response([
-            'progress' => $progress
+            'progress' => $progress === null ? 0 : $progress->progress
         ], 200);
     }
 
@@ -25,6 +25,13 @@ class ProgressController extends Controller
         ->where('category', $request->category)
         ->where('title', $request->title)
         ->first();
+
+        if(!$progress) {
+            $progress = new Progress();
+            $progress->user_id = $request->user()->id;
+            $progress->category = $request->category;
+            $progress->title = $request->title;
+        }
 
         $progress->progress = $request->progress;
         $progress->save();
