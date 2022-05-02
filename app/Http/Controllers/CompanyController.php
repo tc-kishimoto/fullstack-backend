@@ -11,6 +11,7 @@ class CompanyController extends Controller
     public function search(Request $request) {
         $model = Company::select(
             "id","name"
+            , DB::raw("'' img_path")
             , DB::raw("name link")
             , DB::raw("name link_title")
             , DB::raw("name explanation")

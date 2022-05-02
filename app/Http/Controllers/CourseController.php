@@ -19,7 +19,8 @@ class CourseController extends Controller
 
     public function search(Request $request) {
         $result = Course::select(
-            DB::raw("name link")
+            DB::raw("'' img_path")
+            , DB::raw("name link")
             , DB::raw("name link_title")
             , DB::raw("'' explanation")
         )
