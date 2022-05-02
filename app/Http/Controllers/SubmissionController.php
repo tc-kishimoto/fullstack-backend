@@ -11,10 +11,11 @@ class SubmissionController extends Controller
     public function search(Request $request) {
         $result = Submission::select(
             DB::raw("'' img_path")
-            , DB::raw("concat(category, lesson_name) link")
-            , DB::raw("category link_title")
+            , DB::raw("concat(users.name, '：' ,category, lesson_name) link")
+            , DB::raw("concat(users.name, '：' ,category, lesson_name) link_title")
             , DB::raw("comment explanation")
         )
+        ->join('users', 'users.id', '=', 'submissions.user_id')
         // ->where()
         ->get();
 

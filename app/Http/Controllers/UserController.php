@@ -6,19 +6,21 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\Company;
 
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function search(Request $request) {
-        $result = User::select("name"
+        $result = User::select("users.name"
             , DB::raw("icon_path img_path")
-            , DB::raw("name link")
-            , DB::raw("name link_title")
-            , DB::raw("name explanation")
+            , DB::raw("users.name link")
+            , DB::raw("users.name link_title")
+            , DB::raw("concat(users.name, ', 所属企業：', companies.name) explanation")
             )
-        ->where(DB::raw("concat(name, login_id, email)"), "like", '%' . $request->keyword . '%')
+        ->join('companies', 'companies.id', '=', 'users.company_id')
+        ->where(DB::raw("concat(users.name, login_id, email, companies.name)"), "like", '%' . $request->keyword . '%')
         ->get();
         return response($result, 200);
     }
