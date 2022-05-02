@@ -12,7 +12,14 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function search(Request $request) {
+    public function all()
+    {
+        $result = User::all();
+        return response($result, 200);
+    }
+
+    public function search(Request $request)
+    {
         $result = User::select("users.name"
             , DB::raw("icon_path img_path")
             , DB::raw("users.name link")

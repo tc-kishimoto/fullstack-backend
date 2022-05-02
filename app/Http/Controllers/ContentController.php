@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\DB;
 
 class ContentController extends Controller
 {
+    public function getAllCategory()
+    {
+        $result = SearchContent::distinct()->select('category')->get();
+        return response($result, 200);
+    }
+
     public function search(Request $request)
     {
         $result = SearchContent::select('category', 'title'

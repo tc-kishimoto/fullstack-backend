@@ -8,6 +8,12 @@ use App\Models\Course;
 
 class CourseController extends Controller
 {
+    public function all()
+    {
+        $result = Course::all();
+        return response($result, 200);
+    }
+
     public function create(Request $request) {
         $course = Course::create([
             'name' => $request->name

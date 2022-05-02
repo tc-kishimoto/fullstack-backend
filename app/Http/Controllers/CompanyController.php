@@ -8,7 +8,14 @@ use App\Models\Company;
 
 class CompanyController extends Controller
 {
-    public function search(Request $request) {
+    public function all()
+    {
+        $result = Company::all();
+        return response($result, 200);
+    }
+
+    public function search(Request $request)
+    {
         $model = Company::select(
             "id","name"
             , DB::raw("'' img_path")
@@ -23,7 +30,8 @@ class CompanyController extends Controller
         return response($result, 200);
     }
 
-    public function create(Request $request) {
+    public function create(Request $request)
+    {
         $validated = $request->validate([
             'name' => ['required'],
         ]);
