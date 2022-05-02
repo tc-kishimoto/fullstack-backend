@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/searchUser', [UserController::class, 'search']);
     Route::get('/searchCompany', [CompanyController::class, 'search']);
     Route::get('/searchCourse', [CourseController::class, 'search']);
+    Route::get('/searchSubmission', [SubmissionController::class, 'search']);
 });
 
 Route::post('/login', [UserController::class, 'login']);
