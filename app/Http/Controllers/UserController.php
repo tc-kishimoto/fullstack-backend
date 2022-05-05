@@ -20,15 +20,21 @@ class UserController extends Controller
 
     public function search(Request $request)
     {
-        $result = User::select("users.name"
+        $model = User::select("users.name"
             , DB::raw("icon_path img_path")
             , DB::raw("users.name link")
             , DB::raw("users.name link_title")
-            , DB::raw("concat(users.name, ', 所属企業：', companies.name) explanation")
+            , DB::raw("concat(users.name, ', 所属企業', companies.name) explanation")
             )
-        ->join('companies', 'companies.id', '=', 'users.company_id')
-        ->where(DB::raw("concat(users.name, login_id, email, companies.name)"), "like", '%' . $request->keyword . '%')
-        ->get();
+            ->leftJoin('companies', 'companies.id', '=', 'users.company_id')
+            ->where(DB::raw("concat(users.name, users.login_id, users.email, companies.name)"), 'like' , '%'. $request->keyword . '%');
+        if($request->company_id) {
+            $model->where('users.company_id', '=', $request->company_id);
+        }
+        if($request->course_id) {
+            $model->whereRaw("exists (select * from belong_course where course_id = ?)", [$request->course_id]);
+        }
+        $result = $model->get();
         return response($result, 200);
     }
 
