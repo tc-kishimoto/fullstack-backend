@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getCompanies', [CompanyController::class, 'all']);
     Route::get('/getCourses', [CourseController::class, 'all']);
     Route::get('/getCategories', [ContentController::class, 'getAllCategory']);
+    Route::get('/getCourseInfo', [CourseController::class, 'getCourseInfo']);
 });
 
 Route::post('/login', [UserController::class, 'login']);
