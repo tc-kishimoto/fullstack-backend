@@ -18,6 +18,14 @@ class UserController extends Controller
         return response($result, 200);
     }
 
+    public function getAddInCourseTargetUser(Request $request)
+    {
+        $users = User::with('company')
+        ->whereRaw("not exists (select * from belong_course where course_id = ? and user_id = users.id)", [$request->id])
+        ->get();
+        return response($users, 200);
+    }
+
     public function search(Request $request)
     {
         $model = User::select("users.name"
@@ -32,7 +40,7 @@ class UserController extends Controller
             $model->where('users.company_id', '=', $request->company_id);
         }
         if($request->course_id) {
-            $model->whereRaw("exists (select * from belong_course where course_id = ?)", [$request->course_id]);
+            $model->whereRaw("exists (select * from belong_course where course_id = ? and user_id = users.id)", [$request->course_id]);
         }
         $result = $model->get();
         return response($result, 200);
