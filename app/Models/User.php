@@ -47,6 +47,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = ['role_name'];
+
     public function getRoleNameAttribute()
     {
         switch($this->role) {
