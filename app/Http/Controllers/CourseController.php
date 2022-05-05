@@ -34,4 +34,12 @@ class CourseController extends Controller
         ->get();
         return response($result, 200);
     }
+
+    public function getCourseInfo(Request $request)
+    {
+        $result = Course::with('users.user.company')
+        ->where('id', '=', $request->id)
+        ->first();
+        return response($result, 200);
+    }
 }
