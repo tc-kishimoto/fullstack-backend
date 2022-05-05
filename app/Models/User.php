@@ -46,4 +46,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getRoleNameAttribute()
+    {
+        switch($this->role) {
+            case 1:
+                return "システム管理者";
+            case 2:
+                return "企業担当者";
+            case 3:
+                return "講師";
+            case 4:
+                return "一般";
+            default:
+                return "一般";
+        }
+    }
+
+    public function company()
+    {
+        return $this->hasOne(Company::class, 'id', 'company_id');
+    }
 }
