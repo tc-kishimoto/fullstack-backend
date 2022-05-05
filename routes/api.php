@@ -38,6 +38,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getCategories', [ContentController::class, 'getAllCategory']);
     Route::get('/getCourseInfo', [CourseController::class, 'getCourseInfo']);
     Route::get('/getAddInCourseTargetUser', [UserController::class, 'getAddInCourseTargetUser']);
+    Route::post('addUserInCourse', [CourseController::class, 'addUser']);
 });
 
 Route::post('/login', [UserController::class, 'login']);

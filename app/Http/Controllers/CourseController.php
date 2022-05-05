@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Course;
+use App\Models\BelongCourse;
 
 class CourseController extends Controller
 {
@@ -20,7 +21,17 @@ class CourseController extends Controller
         ]);
 
         return response($course, 200);
+    }
 
+    public function addUser(Request $request)
+    {
+        foreach($request->userIds as $userId) {
+            BelongCourse::create([
+                'user_id' => $userId,
+                'course_id' => $request->id,
+            ]);
+        }
+        return response([], 200);
     }
 
     public function search(Request $request) {
