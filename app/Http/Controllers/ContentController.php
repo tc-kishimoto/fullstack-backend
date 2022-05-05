@@ -24,7 +24,7 @@ class ContentController extends Controller
             end
             , 100) explanation")
             , DB::raw("concat('../images/index/', category, '.png') img_path")
-            , DB::raw("concat(category, '_', title, '.html') link")
+            , DB::raw("concat('/htmlcontents/', category, '_', title, '.html') link")
             , DB::raw("concat(category, '_', title) link_title")
             )
         ->where('content', 'like', '%' . $request->keyword . '%')
