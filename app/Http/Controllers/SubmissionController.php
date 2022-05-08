@@ -33,4 +33,11 @@ class SubmissionController extends Controller
 
         return response($submission, 200);
     }
+
+    public function delete(Request $request)
+    {
+        $submission = Submission::find($request->id);
+        $submission->delete();
+        return response([], 200);
+    }
 }
