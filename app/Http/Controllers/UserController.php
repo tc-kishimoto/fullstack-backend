@@ -18,6 +18,12 @@ class UserController extends Controller
         return response($result, 200);
     }
 
+    public function getUser(Request $request)
+    {
+        $user = User::find($request->id);
+        return response($user, 200);
+    }
+
     public function getAddInCourseTargetUser(Request $request)
     {
         $users = User::with('company')
@@ -32,10 +38,10 @@ class UserController extends Controller
             , DB::raw("icon_path img_path")
             , DB::raw("users.name link")
             , DB::raw("users.name link_title")
-            , DB::raw("concat(users.name, ', 所属企業', companies.name) explanation")
+            , DB::raw("concat(users.name, ', 所属企業', ifnull(companies.name, '')) explanation")
             )
             ->leftJoin('companies', 'companies.id', '=', 'users.company_id')
-            ->where(DB::raw("concat(users.name, users.login_id, users.email, companies.name)"), 'like' , '%'. $request->keyword . '%');
+            ->where(DB::raw("concat(users.name, users.login_id, users.email, ifnull(companies.name, ''))"), 'like' , '%'. $request->keyword . '%');
         if($request->company_id) {
             $model->where('users.company_id', '=', $request->company_id);
         }
@@ -88,7 +94,6 @@ class UserController extends Controller
     }
 
     function create(Request $request) {
-        // Log::debug($request);
         $validated = $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users'],
@@ -96,7 +101,6 @@ class UserController extends Controller
             'role' => ['required'],
             'password' => ['required'],
         ]);
-        // Log::debug($validated);
         $user = User::create([
             'name' => $request->name,
             'name_kana' => $request->name_kana,
@@ -106,6 +110,27 @@ class UserController extends Controller
             'role' => $request->role,
             'company_id' => $request->company_id,
         ]);
+        return response($user, 200);
+    }
+
+    public function update(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => ['required'],
+            'email' => ['required', 'email', 'unique:users'],
+            'login_id' => ['required', 'unique:users'],
+            'role' => ['required'],
+            'password' => ['required'],
+        ]);
+        $user = User::find($request->id);
+        $user->name = $request->name;
+        $user->name_kana = $request->name_kana;
+        $user->login_id = $request->login_id;
+        $user->email = $request->email;
+        // $user->password = Hash::make($request->password);
+        $user->role = $request->role;
+        $user->company_id = $request->company_id;
+        $user->save();
         return response($user, 200);
     }
 }

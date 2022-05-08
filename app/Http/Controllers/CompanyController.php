@@ -14,6 +14,12 @@ class CompanyController extends Controller
         return response($result, 200);
     }
 
+    public function getCompany(Request $request)
+    {
+        $company = Company::find($request->id);
+        return response($company, 200);
+    }
+
     public function search(Request $request)
     {
         $model = Company::select(
@@ -42,5 +48,20 @@ class CompanyController extends Controller
         ]);
 
         return response($company, 200);
+    }
+
+    public function update(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => ['required'],
+        ]);
+        $company = Company::find($request->id);
+        $company->name = $request->name;
+        $company->short_name = $request->short_name;
+        $company->url = $request->url;
+        $company->save();
+
+        return response($company, 200);
+
     }
 }

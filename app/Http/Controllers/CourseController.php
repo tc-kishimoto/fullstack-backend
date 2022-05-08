@@ -15,10 +15,32 @@ class CourseController extends Controller
         return response($result, 200);
     }
 
-    public function create(Request $request) {
+    public function getCourse(Request $request) 
+    {
+        $course = Course::find($request->id);
+        return response($course, 200);
+    }
+
+    public function create(Request $request) 
+    {
+        $validated = $request->validate([
+            'name' => ['required'],
+        ]);
         $course = Course::create([
             'name' => $request->name
         ]);
+
+        return response($course, 200);
+    }
+
+    public function update(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => ['required'],
+        ]);
+        $course = Course::find($request->id);
+        $course->name = $request->name;
+        $course->save();
 
         return response($course, 200);
     }
@@ -34,7 +56,8 @@ class CourseController extends Controller
         return response([], 200);
     }
 
-    public function search(Request $request) {
+    public function search(Request $request) 
+    {
         $result = Course::select(
             DB::raw("'' img_path")
             , DB::raw("concat('/html/courseDetail.html?id=', id) link")
