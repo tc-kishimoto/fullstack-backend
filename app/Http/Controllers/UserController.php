@@ -133,4 +133,11 @@ class UserController extends Controller
         $user->save();
         return response($user, 200);
     }
+
+    public function delete(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->delete();
+        return response([], 200);
+    }
 }

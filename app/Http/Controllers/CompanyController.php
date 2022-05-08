@@ -62,6 +62,12 @@ class CompanyController extends Controller
         $company->save();
 
         return response($company, 200);
+    }
 
+    public function delete(Request $request)
+    {
+        $company = Company::find($request->id);
+        $company->delete();
+        return response([], 200);
     }
 }
