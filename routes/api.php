@@ -39,6 +39,15 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getCourseInfo', [CourseController::class, 'getCourseInfo']);
     Route::get('/getAddInCourseTargetUser', [UserController::class, 'getAddInCourseTargetUser']);
     Route::post('addUserInCourse', [CourseController::class, 'addUser']);
+    Route::get('/getUser', [UserController::class, 'getUser']);
+    Route::get('/getCourse', [CourseController::class, 'getCourse']);
+    Route::get('/getCompany', [CompanyController::class, 'getCompany']);
+    Route::post('/updateUser', [UserController::class, 'update']);
+    Route::post('/updateCourse', [CourseController::class, 'update']);
+    Route::post('/updateCompany', [CompanyController::class, 'update']);
+    Route::post('/deleteUser', [UserController::class, 'delete']);
+    Route::post('/deleteCourse', [CourseController::class, 'delete']);
+    Route::post('/deleteCompany', [CompanyController::class, 'delete']);
 });
 
 Route::post('/login', [UserController::class, 'login']);
