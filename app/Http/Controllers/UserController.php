@@ -20,7 +20,7 @@ class UserController extends Controller
 
     public function getUser(Request $request)
     {
-        $user = User::find($request->id);
+        $user = User::with('company')->find($request->id);
         return response($user, 200);
     }
 
@@ -36,7 +36,7 @@ class UserController extends Controller
     {
         $model = User::select("users.name"
             , DB::raw("icon_path img_path")
-            , DB::raw("users.name link")
+            , DB::raw("concat('/html/myPage.html?id=', users.id) link")
             , DB::raw("users.name link_title")
             , DB::raw("concat(users.name, ', 所属企業', ifnull(companies.name, '')) explanation")
             )
@@ -120,7 +120,6 @@ class UserController extends Controller
             'email' => ['required', 'email', 'unique:users'],
             'login_id' => ['required', 'unique:users'],
             'role' => ['required'],
-            'password' => ['required'],
         ]);
         $user = User::find($request->id);
         $user->name = $request->name;
