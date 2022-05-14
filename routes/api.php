@@ -49,6 +49,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/deleteCourse', [CourseController::class, 'delete']);
     Route::post('/deleteCompany', [CompanyController::class, 'delete']);
     Route::post('/deleteSubmission', [SubmissionController::class, 'delete']);
+    Route::get('/getSubmissions', [SubmissionController::class, 'getSubmissions']);
 });
 
 Route::post('/login', [UserController::class, 'login']);

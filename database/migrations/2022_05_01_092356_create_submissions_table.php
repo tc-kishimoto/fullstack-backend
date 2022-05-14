@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->string('category');
             $table->string('lesson_name');
+            $table->String('url');
             $table->string('comment', 2000);
             $table->timestamps();
         });
