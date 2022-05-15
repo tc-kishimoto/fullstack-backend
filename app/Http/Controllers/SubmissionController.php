@@ -48,6 +48,10 @@ class SubmissionController extends Controller
 
     public function create(Request $request)
     {
+        $validated = $request->validate([
+            'url' => ['required'],
+            'comment' => ['required'],
+        ]);
         $submission = Submission::create([
             'user_id' => $request->user()->id,
             'category' => $request->category,
@@ -55,6 +59,20 @@ class SubmissionController extends Controller
             'url' => $request->url,
             'comment' => $request->comment,
         ]);
+
+        return response($submission, 200);
+    }
+
+    public function update(Request $request)
+    {
+        $validated = $request->validate([
+            'url' => ['required'],
+            'comment' => ['required'],
+        ]);
+        $submission = Submission::find($request->id);
+        $submission->url = $request->url;
+        $submission->comment = $request->comment;
+        $submission->save();
 
         return response($submission, 200);
     }
