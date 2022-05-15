@@ -139,4 +139,15 @@ class UserController extends Controller
         $user->delete();
         return response([], 200);
     }
+
+    public function updatePassword(Request $request)
+    {
+        $user = User::find($request->user()->id)->makeVisible('password');
+        if(!Hash::check($request->password, $user->password)) {
+            return response(['message' => '現在のパスワードが無効です。'], 400);
+        }
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+        return response($user, 200);
+    }
 }
