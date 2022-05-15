@@ -52,7 +52,7 @@ class ProgressController extends Controller
         left join (
         select category, count(*) count
         from progresses
-        where user_id = " . $request->user()->id ."
+        where user_id = " . $request->user_id ."
         group by category
         ) p
         on c.category = p.category
