@@ -38,6 +38,14 @@ class ProgressController extends Controller
         $progress->save();
     }
 
+    public function getCategoryProgress(Request $request)
+    {
+        $result = Progress::where('user_id', $request->user()->id)
+        ->where('category', $request->category)
+        ->get();
+        return response($result, 200);
+    }
+
     public function getAchivement(Request $request)
     {
         $result = DB::select(DB::raw("

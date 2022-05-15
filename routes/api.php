@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getSubmissions', [SubmissionController::class, 'getSubmissions']);
     Route::post('/updatePassword', [UserController::class, 'updatePassword']);
     Route::get('/getAchivement', [ProgressController::class, 'getAchivement']);
+    Route::get('/getCategoryProgress', [ProgressController::class, 'getCategoryProgress']);
 });
 
 Route::post('/login', [UserController::class, 'login']);
