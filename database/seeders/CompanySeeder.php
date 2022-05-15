@@ -23,5 +23,13 @@ class CompanySeeder extends Seeder
             'name' => '株式会社OSE',
             'short_name' => 'OSE',
         ]);
+        DB::table('companies')->insert([
+            'name' => '株式会社テクノコア',
+            'short_name' => 'テクノコア',
+        ]);
+        DB::table('companies')->insert([
+            'name' => '株式会社琉球ネットワークサービス',
+            'short_name' => 'RNS',
+        ]);
     }
 }

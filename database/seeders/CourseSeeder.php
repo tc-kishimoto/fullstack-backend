@@ -21,5 +21,11 @@ class CourseSeeder extends Seeder
         DB::table('courses')->insert([
             'name' => '2022年日本橋教室A',
         ]);
+        DB::table('courses')->insert([
+            'name' => '2022年新宿教室',
+        ]);
+        DB::table('courses')->insert([
+            'name' => '2022年大阪教室',
+        ]);
     }
 }
