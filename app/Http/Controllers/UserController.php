@@ -36,7 +36,7 @@ class UserController extends Controller
     {
         $model = User::select("users.name"
             , DB::raw("icon_path img_path")
-            , DB::raw("concat('/html/myPage.html?id=', users.id) link")
+            , DB::raw("concat('/html/userDetail.html?id=', users.id) link")
             , DB::raw("users.name link_title")
             , DB::raw("concat(users.name, ', 所属企業', ifnull(companies.name, '')) explanation")
             )
