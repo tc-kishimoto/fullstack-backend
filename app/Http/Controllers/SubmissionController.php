@@ -27,7 +27,8 @@ class SubmissionController extends Controller
     {
         $model = Submission::select(
             DB::raw('users.name user_name')
-            , 'category', 'lesson_name', 'comment', 'submissions.url', 'submissions.created_at')
+            ,'submissions.id' ,'category', 'lesson_name', 'comment', 'submissions.url'
+            , 'submissions.created_at', 'submissions.updated_at')
             ->join('users', 'users.id', '=', 'submissions.user_id')
             ->leftJoin('companies', 'companies.id', '=', 'users.company_id')
             ->leftJoin('belong_course', 'belong_course.user_id', '=', 'users.id')
