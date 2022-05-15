@@ -52,6 +52,7 @@ class SubmissionController extends Controller
             'user_id' => $request->user()->id,
             'category' => $request->category,
             'lesson_name' => $request->lesson_name,
+            'url' => $request->url,
             'comment' => $request->comment,
         ]);
 

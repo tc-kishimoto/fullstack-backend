@@ -14,6 +14,7 @@ class Submission extends Model
         'user_id',
         'category',
         'lesson_name',
+        'url',
         'comment',
     ];
 
