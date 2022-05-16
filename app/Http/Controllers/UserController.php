@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Company;
 
@@ -117,8 +118,8 @@ class UserController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required'],
-            'email' => ['required', 'email', 'unique:users'],
-            'login_id' => ['required', 'unique:users'],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($request->id)],
+            'login_id' => ['required', Rule::unique('users')->ignore($request->id)],
             'role' => ['required'],
         ]);
         $user = User::find($request->id);
