@@ -58,7 +58,7 @@ class CompanyController extends Controller
         $company = Company::find($request->id);
         $company->name = $request->name;
         $company->short_name = $request->short_name;
-        $company->url = $request->url;
+        $company->URL = $request->url;
         $company->save();
 
         return response($company, 200);
