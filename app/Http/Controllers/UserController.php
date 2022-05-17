@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use App\Models\User;
-use App\Models\Company;
+use App\Consts\UserConst;
 
 use Illuminate\Http\Request;
 
@@ -46,9 +46,15 @@ class UserController extends Controller
         if($request->company_id) {
             $model->where('users.company_id', '=', $request->company_id);
         }
+        if($request->user()->role === UserConst::ROLE_COMPANY_ADMIN) {
+            $model->where('users.company_id', '=', $request->user()->company_id);
+        }
         if($request->course_id) {
             $model->whereRaw("exists (select * from belong_course where course_id = ? and user_id = users.id)", [$request->course_id]);
         }
+        // if($request->user()->role === UserConst::ROLE_COURSE_ADMIN) {
+        //     $model->whereRaw("exists (select * from belong_course where course_id = ? and user_id = users.id)", [$request->course_id]);
+        // }
         $result = $model->get();
         return response($result, 200);
     }
@@ -150,5 +156,13 @@ class UserController extends Controller
         $user->password = Hash::make($request->new_password);
         $user->save();
         return response($user, 200);
+    }
+
+    public function getCompanyUsers(Request $request)
+    {
+        $result = User::with('company')
+            ->where('company_id', $request->company_id)
+            ->get();
+        return response($result, 200);
     }
 }
