@@ -8,6 +8,7 @@ use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\SubmissionController;
+use App\Http\Controllers\DisplayController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getAchivement', [ProgressController::class, 'getAchivement']);
     Route::get('/getCategoryProgress', [ProgressController::class, 'getCategoryProgress']);
     Route::get('/getCompanyUsers', [UserController::class, 'getCompanyUsers']);
+    Route::get('/getDiplayContents', [DisplayController::class, 'getDiplayContents']);
 });
 
 Route::post('/login', [UserController::class, 'login']);
