@@ -24,4 +24,19 @@ class DisplayController extends Controller
             "));
         return response($result, 200);
     }
+
+    public function updateDisplayFlag(Request $request)
+    {
+        $displayControl = DisplayControl::updateOrCreate(
+            [
+                'course_id' => $request->course_id,
+                'category' => $request->category,
+                'title' => $request->title,
+            ],
+            [
+                'display_flag' => $request->display_flag,
+            ]
+        );
+        return response($displayControl, 200);
+    }
 }

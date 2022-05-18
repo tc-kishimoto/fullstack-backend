@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getCategoryProgress', [ProgressController::class, 'getCategoryProgress']);
     Route::get('/getCompanyUsers', [UserController::class, 'getCompanyUsers']);
     Route::get('/getDiplayContents', [DisplayController::class, 'getDiplayContents']);
+    Route::post('/updateDisplayFlag', [DisplayController::class, 'updateDisplayFlag']);
 });
 
 Route::post('/login', [UserController::class, 'login']);

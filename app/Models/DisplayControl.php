@@ -10,4 +10,11 @@ class DisplayControl extends Model
     use HasFactory;
 
     protected $table = 'display_control';
+
+    protected $fillable = [
+        'course_id',
+        'category',
+        'title',
+        'display_flag',
+    ];
 }
