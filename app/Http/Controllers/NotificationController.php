@@ -12,7 +12,7 @@ class NotificationController extends Controller
         $result = Notification::where('target_user_id', '=', $request->user()->id)
         ->where('status', '=', 0)
         ->get();
-        return response($result, 0);
+        return response($result, 200);
     }
 
     public function updateNotificationStatus(Request $request)
