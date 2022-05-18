@@ -26,7 +26,8 @@ class SubmissionController extends Controller
     public function getSubmissions(Request $request)
     {
         $model = Submission::select(
-            DB::raw('users.name user_name')
+            DB::raw('users.id user_id')
+            , DB::raw('users.name user_name')
             ,'submissions.id' ,'category', 'lesson_name', 'comment', 'submissions.url'
             , 'submissions.created_at', 'submissions.updated_at')
             ->join('users', 'users.id', '=', 'submissions.user_id')
