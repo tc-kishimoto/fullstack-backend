@@ -60,6 +60,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getDiplayContents', [DisplayController::class, 'getDiplayContents']);
     Route::post('/updateDisplayFlag', [DisplayController::class, 'updateDisplayFlag']);
     Route::get('/getNotification', [NotificationController::class, 'getNotification']);
+    Route::post('/updateNotificationStatus', [NotificationController::class, 'updateNotificationStatus']);
 });
 
 Route::post('/login', [UserController::class, 'login']);
