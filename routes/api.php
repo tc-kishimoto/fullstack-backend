@@ -9,6 +9,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\DisplayController;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getCompanyUsers', [UserController::class, 'getCompanyUsers']);
     Route::get('/getDiplayContents', [DisplayController::class, 'getDiplayContents']);
     Route::post('/updateDisplayFlag', [DisplayController::class, 'updateDisplayFlag']);
+    Route::get('/getNotification', [NotificationController::class, 'getNotification']);
 });
 
 Route::post('/login', [UserController::class, 'login']);
