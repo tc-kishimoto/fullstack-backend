@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('target_user_id');
             $table->string('target_table');
             $table->string('target_id');
-            $table->string('conent');
+            $table->string('conent')->nullable();
             $table->integer('status');
             $table->timestamps();
         });
