@@ -9,12 +9,18 @@ class NotificationController extends Controller
 {
     public function getNotification(Request $request)
     {
-        $result = Notification::where('target_user_id', '=', $request->user()->id)
-        // ->where('status', '=', 0)
+        $notifications = Notification::where('target_user_id', '=', $request->user()->id)
         ->orderByDesc('created_at')
         ->limit(10)
         ->get();
-        return response($result, 200);
+
+        $count = Notification::where('target_user_id', '=', $request->user()->id)
+        ->where('status', '=', 0)
+        ->count();
+        return response([
+            'notifications' => $notifications,
+            'count' => $count,
+        ], 200);
     }
 
     public function updateNotificationStatus(Request $request)

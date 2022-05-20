@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
+use App\Models\BelongCourse;
 use Illuminate\Http\Request;
 use App\Models\Submission;
 use Illuminate\Support\Facades\DB;
@@ -60,6 +62,26 @@ class SubmissionController extends Controller
             'url' => $request->url,
             'comment' => $request->comment,
         ]);
+
+        // 通知
+        $targetCourse = BelongCourse::where('user_id', $request->user()->id)->get();
+        $targetUsers = BelongCourse::whereIn('course_id', $targetCourse->pluck('course_id'))
+        ->whereExists(function ($query) {
+            $query->select(DB::raw(1))
+                  ->from('users')
+                  ->whereColumn('users.id', 'belong_course.user_id')
+                  ->whereIn('role', [1, 3]); // システム管理者・コース管理者
+        })
+        ->get();
+        foreach($targetUsers as $user) {
+            Notification::create([
+                'source_user_id' => $request->user()->id,
+                'target_user_id' => $user->id,
+                'target_table' => 'submissions',
+                'target_id' => $submission->id,
+                'status' => 0,
+            ]);
+        }
 
         return response($submission, 200);
     }

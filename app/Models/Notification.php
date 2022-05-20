@@ -10,7 +10,7 @@ class Notification extends Model
     use HasFactory;
 
     protected $fillable = [
-        'sourse_user_id',
+        'source_user_id',
         'target_user_id',
         'target_table',
         'target_id',
@@ -27,6 +27,8 @@ class Notification extends Model
         'created_at' => 'datetime:Y-m-d H:i:s',
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    protected $appends = ['notify_title'];
 
     public function getNotifyTitleAttribute()
     {
