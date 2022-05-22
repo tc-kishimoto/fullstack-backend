@@ -25,6 +25,12 @@ class SubmissionController extends Controller
         return response($result, 200);
     }
 
+    public function getSubmission(Request $request)
+    {
+        $submission = Submission::find($request->id);
+        return response($submission, 200);
+    }
+
     public function getSubmissions(Request $request)
     {
         $model = Submission::select(
