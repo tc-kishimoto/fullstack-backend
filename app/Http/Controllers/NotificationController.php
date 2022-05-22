@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Notification;
 
 class NotificationController extends Controller
 {
+    public function search(Request $request)
+    {
+        $result = Notification::where('target_user_id', $request->user()->id)
+        ->orderByDesc('created_at')
+        ->get();
+        return response($result, 200);
+    }
     public function getNotification(Request $request)
     {
         $notifications = Notification::where('target_user_id', '=', $request->user()->id)
