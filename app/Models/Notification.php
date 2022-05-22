@@ -35,6 +35,8 @@ class Notification extends Model
         switch($this->target_table) {
             case 'submissions':
                 return '演習提出通知';
+            case 'submission_comments':
+                return '演習コメント通知';
             default :
                 return '';
         }
@@ -44,6 +46,8 @@ class Notification extends Model
     {
         switch($this->target_table) {
             case 'submissions':
+                return "/html/submissionDetail.html?id={$this->target_id}";
+            case 'submission_comments':
                 return "/html/submissionDetail.html?id={$this->target_id}";
             default :
                 return '';
@@ -56,6 +60,9 @@ class Notification extends Model
         switch($this->target_table) {
             case 'submissions':
                 $submission = Submission::find($this->target_id);
+                return "{$user->name}さんが{$submission->category}_{$submission->lesson_name}を提出しました。";
+            case 'submission_comments':
+                $submission = Submission::find(SubmissionComment::find($this->target_id)->id);
                 return "{$user->name}さんが{$submission->category}_{$submission->lesson_name}を提出しました。";
             default :
                 return '';
