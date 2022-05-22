@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('submission_comments', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
             $table->integer('submission_id');
             $table->string('comment', 2000);
             $table->timestamps();
