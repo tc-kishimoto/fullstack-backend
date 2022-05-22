@@ -6,6 +6,7 @@ use App\Models\Notification;
 use App\Models\BelongCourse;
 use Illuminate\Http\Request;
 use App\Models\Submission;
+use App\Models\SubmissionComment;
 use Illuminate\Support\Facades\DB;
 
 class SubmissionController extends Controller
@@ -111,5 +112,27 @@ class SubmissionController extends Controller
         $submission = Submission::find($request->id);
         $submission->delete();
         return response([], 200);
+    }
+
+    public function addComment(Request $request)
+    {
+        $result = SubmissionComment::create([
+            'submission_id' => $request->id,
+            'user_id' => $request->user()->id,
+            'comment' => $request->comment,
+        ]);
+
+        return response($result, 200);
+
+    }
+
+    public function getCommentList(Request $request)
+    {
+        $result = SubmissionComment::with('user')
+        ->where('submission_id', $request->id)
+        ->orderByDesc('created_at')
+        ->get();
+
+        return response($result, 200);
     }
 }

@@ -63,6 +63,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getNotification', [NotificationController::class, 'getNotification']);
     Route::post('/updateNotificationStatus', [NotificationController::class, 'updateNotificationStatus']);
     Route::get('/getSubmission', [SubmissionController::class, 'getSubmission']);
+    Route::post('/addSubmissionComment', [SubmissionController::class, 'addComment']);
+    Route::get('/getSubmissionCommentList', [SubmissionController::class, 'getCommentList']);
 });
 
 Route::post('/login', [UserController::class, 'login']);
