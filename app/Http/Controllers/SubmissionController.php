@@ -181,4 +181,17 @@ class SubmissionController extends Controller
 
         return response($result, 200);
     }
+
+    public function commentDelete(Request $request)
+    {
+        $id = $request->id;
+        DB::transaction(function() use ($id) {
+            Notification::where('target_table', 'submission_comments')
+            ->where('target_id', $id)->delete();
+
+            $sc = SubmissionComment::find($id);
+            $sc->delete();
+        });
+        return response([], 200);
+    }
 }
