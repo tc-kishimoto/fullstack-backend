@@ -48,7 +48,8 @@ class Notification extends Model
             case 'submissions':
                 return "/html/submissionDetail.html?id={$this->target_id}";
             case 'submission_comments':
-                return "/html/submissionDetail.html?id={$this->target_id}";
+                $id = SubmissionComment::find($this->target_id)->submission_id;
+                return "/html/submissionDetail.html?id={$id}";
             default :
                 return '';
         }
