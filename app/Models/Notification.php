@@ -65,8 +65,12 @@ class Notification extends Model
                 return $submission !== null ? "{$user->name}さんが{$submission->category}_{$submission->lesson_name}を提出しました。" : "";
             case 'submission_comments':
                 $sc = SubmissionComment::find($this->target_id);
-                $submission = Submission::find($sc->submission_id);
-                return $submission !== null ? "{$user->name}さんが{$submission->category}_{$submission->lesson_name}にコメントしました。" : "";
+                if($sc) {
+                    $submission = Submission::find($sc->submission_id);
+                    return $submission !== null ? "{$user->name}さんが{$submission->category}_{$submission->lesson_name}にコメントしました。" : "";
+                } else {
+                    return "";
+                }
             default :
                 return '';
         }
