@@ -110,8 +110,19 @@ class SubmissionController extends Controller
 
     public function delete(Request $request)
     {
-        $submission = Submission::find($request->id);
-        $submission->delete();
+        $id = $request->id;
+        DB::transaction(function() use ($id) {
+
+            Notification::where('target_table', 'submissions')
+            ->where('target_id', $id)
+            ->delete();
+
+            SubmissionComment::where('submission_id', $id)->delete();
+
+            $submission = Submission::find($id);
+            $submission->delete();
+
+        });
         return response([], 200);
     }
 
