@@ -29,7 +29,8 @@ class SubmissionController extends Controller
 
     public function getSubmission(Request $request)
     {
-        $submission = Submission::find($request->id);
+        $submission = Submission::with('user')
+        ->find($request->id);
         return response($submission, 200);
     }
 
