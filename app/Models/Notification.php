@@ -48,7 +48,8 @@ class Notification extends Model
             case 'submissions':
                 return "/html/submissionDetail.html?id={$this->target_id}";
             case 'submission_comments':
-                $id = SubmissionComment::find($this->target_id)->submission_id;
+                $sc = SubmissionComment::find($this->target_id);
+                $id = $sc !== null ? $sc->submission_id : -1;
                 return "/html/submissionDetail.html?id={$id}";
             default :
                 return '';
@@ -61,10 +62,11 @@ class Notification extends Model
         switch($this->target_table) {
             case 'submissions':
                 $submission = Submission::find($this->target_id);
-                return "{$user->name}さんが{$submission->category}_{$submission->lesson_name}を提出しました。";
+                return $submission !== null ? "{$user->name}さんが{$submission->category}_{$submission->lesson_name}を提出しました。" : "";
             case 'submission_comments':
-                $submission = Submission::find(SubmissionComment::find($this->target_id)->submission_id);
-                return "{$user->name}さんが{$submission->category}_{$submission->lesson_name}にコメントしました。";
+                $sc = SubmissionComment::find($this->target_id);
+                $submission = Submission::find($sc->submission_id);
+                return $submission !== null ? "{$user->name}さんが{$submission->category}_{$submission->lesson_name}にコメントしました。" : "";
             default :
                 return '';
         }
