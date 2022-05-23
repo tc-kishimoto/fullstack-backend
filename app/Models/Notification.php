@@ -62,8 +62,8 @@ class Notification extends Model
                 $submission = Submission::find($this->target_id);
                 return "{$user->name}さんが{$submission->category}_{$submission->lesson_name}を提出しました。";
             case 'submission_comments':
-                $submission = Submission::find(SubmissionComment::find($this->target_id)->id);
-                return "{$user->name}さんが{$submission->category}_{$submission->lesson_name}を提出しました。";
+                $submission = Submission::find(SubmissionComment::find($this->target_id)->submission_id);
+                return "{$user->name}さんが{$submission->category}_{$submission->lesson_name}にコメントしました。";
             default :
                 return '';
         }
