@@ -182,6 +182,13 @@ class SubmissionController extends Controller
         return response($result, 200);
     }
 
+    public function commentUpdate(Request $request) {
+        $sc = SubmissionComment::find($request->id);
+        $sc->comment = $request->comment;
+        $result = $sc->save();
+        return response($result, 200);
+    }
+
     public function commentDelete(Request $request)
     {
         $id = $request->id;
