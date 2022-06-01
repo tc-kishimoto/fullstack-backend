@@ -3,9 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class SearchContent extends Model
+class SearchContent extends BaseModel
 {
     use HasFactory;
     // protected $connection = 'mongodb';
