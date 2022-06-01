@@ -61,12 +61,12 @@ class Notification extends BaseModel
         switch($this->target_table) {
             case 'submissions':
                 $submission = Submission::find($this->target_id);
-                return $submission !== null ? "{$user->name}さんが{$submission->category}_{$submission->lesson_name}を提出しました。" : "";
+                return $submission !== null ? "{$user->name}さんが{$submission->category}_{$submission->lesson_name}を提出しました。日時：{$submission->created_at}" : "";
             case 'submission_comments':
                 $sc = SubmissionComment::find($this->target_id);
                 if($sc) {
                     $submission = Submission::find($sc->submission_id);
-                    return $submission !== null ? "{$user->name}さんが{$submission->category}_{$submission->lesson_name}にコメントしました。" : "";
+                    return $submission !== null ? "{$user->name}さんが{$submission->category}_{$submission->lesson_name}にコメントしました。日時：{$sc->created_at}" : "";
                 } else {
                     return "";
                 }
