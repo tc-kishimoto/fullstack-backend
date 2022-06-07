@@ -14,6 +14,17 @@ class ContentController extends Controller
         return response($result, 200);
     }
 
+    public function getCategoryUnit(Request $request)
+    {
+        $result = SearchContent::select('title')
+        ->where('category', $request->category)
+        ->where('title', 'not like', '%演習問題%')
+        ->where('title', 'not like', '%練習問題%')
+        ->where('title', 'not like', '%単元課題%')
+        ->get();
+        return response($result, 200);
+    }
+
     public function search(Request $request)
     {
         $result = SearchContent::select('category', 'title'
