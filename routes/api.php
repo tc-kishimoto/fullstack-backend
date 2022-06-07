@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/newCourse', [CourseController::class, 'create']);
     Route::post('/submissionLesson', [SubmissionController::class, 'create']);
     Route::get('getProgress', [ProgressController::class, 'getProgress']);
-    Route::post('updateProgress', [ProgressController::class, 'updateProgress']);
+    Route::put('updateProgress', [ProgressController::class, 'updateProgress']);
     Route::post('/logout', [UserController::class, 'logout']);
     Route::get('/searchUser', [UserController::class, 'search']);
     Route::get('/searchCompany', [CompanyController::class, 'search']);
