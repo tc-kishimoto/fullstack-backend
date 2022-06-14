@@ -1,0 +1,54 @@
+swagger: "2.0"
+info:
+  description: "fullstack-バックエンド REST API"
+  version: "1.0.0"
+  title: "fullstack-バックエンド"
+  termsOfService: "https://fullstack-backend.com"
+  contact:
+    email: "k.kishimoto@tc-tech.co.jp"
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: petstore.swagger.io
+basePath: /v2
+schemes:
+- "https"
+- "http"
+paths:
+  /user:
+    post:
+      tags:
+      - "user"
+      summary: "ユーザー作成"
+      description: "ユーザーの作成"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "ユーザーオブジェクト"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        default:
+          description: "successful operation"
+definitions:
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      name_kana:
+        type: "string"
+      login_id:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+      role:
+        type: "integer"
+      company_id:
+        type: "integer"
