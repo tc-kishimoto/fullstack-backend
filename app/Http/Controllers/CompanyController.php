@@ -20,6 +20,13 @@ class CompanyController extends Controller
         return response($company, 200);
     }
 
+    public function filterCompany(Request $request)
+    {
+        $result = Company::where(DB::raw("concat(name, ifnull(short_name, ''))"), 'like', '%' . $request->keyword . '%')
+        ->get();
+        return response($result, 200);
+    }
+
     public function search(Request $request)
     {
         $model = Company::select(
