@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function all()
     {
-        $result = User::all();
+        $result = User::with('company')->get();
         return response($result, 200);
     }
 
@@ -60,7 +60,7 @@ class UserController extends Controller
     }
 
     public function login(Request $request) {
-        // Log::debug($request);
+        Log::debug($request);
         if(strpos($request->email, '@')) {
             $rule = ['required', 'email'];
             $column = 'email';

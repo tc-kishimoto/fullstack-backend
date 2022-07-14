@@ -50,7 +50,7 @@ class User extends Authenticatable
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
 
-    protected $appends = ['role_name'];
+    protected $appends = ['role_name', 'company_name'];
 
     public function getRoleNameAttribute()
     {
@@ -66,6 +66,11 @@ class User extends Authenticatable
             default:
                 return "一般";
         }
+    }
+
+    public function getCompanyNameAttribute()
+    {
+        return $this->company !== null ? $this->company->name : '';
     }
 
     public function company()
