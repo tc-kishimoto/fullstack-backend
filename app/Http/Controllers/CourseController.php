@@ -15,13 +15,13 @@ class CourseController extends Controller
         return response($result, 200);
     }
 
-    public function getCourse(Request $request) 
+    public function getCourse(Request $request)
     {
         $course = Course::find($request->id);
         return response($course, 200);
     }
 
-    public function create(Request $request) 
+    public function create(Request $request)
     {
         $validated = $request->validate([
             'name' => ['required'],
@@ -63,7 +63,7 @@ class CourseController extends Controller
         return response([], 200);
     }
 
-    public function search(Request $request) 
+    public function search(Request $request)
     {
         $result = Course::select(
             DB::raw("'' img_path")
@@ -80,6 +80,14 @@ class CourseController extends Controller
     {
         $result = Course::with('users.user.company')
         ->where('id', '=', $request->id)
+        ->first();
+        return response($result, 200);
+    }
+
+    public function getCourseById($id)
+    {
+        $result = Course::with('users.user.company')
+        ->where('id', '=', $id)
         ->first();
         return response($result, 200);
     }

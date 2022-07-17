@@ -42,11 +42,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getCategories', [ContentController::class, 'getAllCategory']);
     Route::get('/getUnits', [ContentController::class, 'getCategoryUnit']);
     Route::get('/getCourseInfo', [CourseController::class, 'getCourseInfo']);
+    Route::get('/getCourse/{id}', [CourseController::class, 'getCourseById']);
     Route::get('/getAddInCourseTargetUser', [UserController::class, 'getAddInCourseTargetUser']);
     Route::post('addUserInCourse', [CourseController::class, 'addUser']);
     Route::get('/user', [UserController::class, 'getUser']);
+    Route::get('/getUser/{id}', [UserController::class, 'getUserById']);
     Route::get('/course', [CourseController::class, 'getCourse']);
     Route::get('/company', [CompanyController::class, 'getCompany']);
+    Route::get('/getCompany/{id}', [CompanyController::class, 'getCompanyById']);
     Route::put('/user', [UserController::class, 'update']);
     Route::put('/course', [CourseController::class, 'update']);
     Route::put('/company', [CompanyController::class, 'update']);

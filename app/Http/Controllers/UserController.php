@@ -25,6 +25,12 @@ class UserController extends Controller
         return response($user, 200);
     }
 
+    public function getUserById($id)
+    {
+        $user = User::with('company')->find($id);
+        return response($user, 200);
+    }
+
     public function getAddInCourseTargetUser(Request $request)
     {
         $users = User::with('company')
