@@ -83,4 +83,11 @@ class CompanyController extends Controller
         $company->delete();
         return response([], 200);
     }
+
+    public function deleteById($id)
+    {
+        $company = Company::find($id);
+        $company->delete();
+        return response([], 200);
+    }
 }

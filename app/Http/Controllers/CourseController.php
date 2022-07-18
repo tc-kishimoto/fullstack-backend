@@ -52,6 +52,13 @@ class CourseController extends Controller
         return response([], 200);
     }
 
+    public function deleteById($id)
+    {
+        $course = Course::find($id);
+        $course->delete();
+        return response([], 200);
+    }
+
     public function addUser(Request $request)
     {
         foreach($request->userIds as $userId) {
