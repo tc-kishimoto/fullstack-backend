@@ -153,6 +153,13 @@ class UserController extends Controller
         return response([], 200);
     }
 
+    public function deleteById($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return response([], 200);
+    }
+
     public function updatePassword(Request $request)
     {
         $user = User::find($request->user()->id)->makeVisible('password');
