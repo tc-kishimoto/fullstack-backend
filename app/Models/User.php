@@ -50,7 +50,12 @@ class User extends Authenticatable
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
 
-    protected $appends = ['role_name', 'company_name'];
+    protected $appends = [
+        'role_name',
+        'company_name',
+        'created_date',
+        'company_short_name',
+    ];
 
     public function getRoleNameAttribute()
     {
@@ -71,6 +76,16 @@ class User extends Authenticatable
     public function getCompanyNameAttribute()
     {
         return $this->company !== null ? $this->company->name : '';
+    }
+
+    public function getCompanyShortNameAttribute()
+    {
+        return $this->company !== null ? $this->company->short_name : '';
+    }
+
+    public function getCreatedDateAttribute()
+    {
+        return $this->created_at !== null ? $this->created_at->format('Y-m-d') : '';
     }
 
     public function company()
