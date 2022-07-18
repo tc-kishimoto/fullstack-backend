@@ -69,6 +69,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getAchivement', [ProgressController::class, 'getAchivement']);
     Route::get('/getCategoryProgress', [ProgressController::class, 'getCategoryProgress']);
     Route::get('/getCompanyUsers', [UserController::class, 'getCompanyUsers']);
+    Route::get('/getCompanyUsers/{id}', [UserController::class, 'filterCompanyUsers']);
     Route::get('/getDiplayContents', [DisplayController::class, 'getDiplayContents']);
     Route::post('/updateDisplayFlag', [DisplayController::class, 'updateDisplayFlag']);
     Route::get('/getNotification', [NotificationController::class, 'getNotification']);

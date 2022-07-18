@@ -195,4 +195,12 @@ class UserController extends Controller
             ->get();
         return response($result, 200);
     }
+
+    public function filterCompanyUsers($id)
+    {
+        $result = User::with('company')
+            ->where('company_id', $id)
+            ->get();
+        return response($result, 200);
+    }
 }
