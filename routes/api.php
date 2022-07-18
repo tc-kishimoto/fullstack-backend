@@ -77,6 +77,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getSubmissionCommentList', [SubmissionController::class, 'getCommentList']);
     Route::delete('/submissionComment', [SubmissionController::class, 'commentDelete']);
     Route::put('/submissionComment', [SubmissionController::class, 'commentUpdate']);
+    Route::get('/getMySubmissions', [SubmissionController::class, 'getMySubmissions']);
+    Route::get('getSubmission/{id}', [SubmissionController::class, 'find']);
 });
 
 Route::post('/login', [UserController::class, 'login']);

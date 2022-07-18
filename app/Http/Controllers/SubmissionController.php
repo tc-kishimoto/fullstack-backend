@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\DB;
 
 class SubmissionController extends Controller
 {
+    public function getMySubmissions(Request $request)
+    {
+        $result = Submission::where('id', $request->user()->id)->get();
+        return response($result, 200);
+    }
+
     public function search(Request $request)
     {
         $result = Submission::select(
@@ -200,5 +206,12 @@ class SubmissionController extends Controller
             $sc->delete();
         });
         return response([], 200);
+    }
+
+    public function find($id)
+    {
+        $result = Submission::with('comments')->where('id', $id)
+        ->first();
+        return response($result, 200);
     }
 }

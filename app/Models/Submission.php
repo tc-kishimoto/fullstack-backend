@@ -27,4 +27,9 @@ class Submission extends BaseModel
         'created_at' => 'datetime:Y-m-d H:i:s',
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    public function comments()
+    {
+        return $this->hasMany(SubmissionComment::class);
+    }
 }
