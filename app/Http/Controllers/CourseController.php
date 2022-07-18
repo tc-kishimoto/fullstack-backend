@@ -83,6 +83,13 @@ class CourseController extends Controller
         return response($result, 200);
     }
 
+    public function filter(Request $request)
+    {
+        $result = Course::where('name', 'like', '%' . $request->keyword . '%')
+        ->get();
+        return response($result, 200);
+    }
+
     public function getCourseInfo(Request $request)
     {
         $result = Course::with('users.user.company')

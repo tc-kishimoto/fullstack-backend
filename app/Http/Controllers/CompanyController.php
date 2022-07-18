@@ -26,7 +26,7 @@ class CompanyController extends Controller
         return response($company, 200);
     }
 
-    public function filterCompany(Request $request)
+    public function filter(Request $request)
     {
         $result = Company::where(DB::raw("concat(name, ifnull(short_name, ''))"), 'like', '%' . $request->keyword . '%')
         ->get();

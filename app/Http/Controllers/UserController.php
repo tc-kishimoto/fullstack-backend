@@ -65,6 +65,23 @@ class UserController extends Controller
         return response($result, 200);
     }
 
+    public function filter(Request $request)
+    {
+        $model = User::with('company')
+            ->leftJoin('companies', 'companies.id', '=', 'users.company_id');
+        if($request->company_id) {
+            $model->where('users.company_id', '=', $request->company_id);
+        }
+        if($request->user()->role === UserConst::ROLE_COMPANY_ADMIN) {
+            $model->where('users.company_id', '=', $request->user()->company_id);
+        }
+        if($request->course_id) {
+            $model->whereRaw("exists (select * from belong_course where course_id = ? and user_id = users.id)", [$request->course_id]);
+        }
+        $result = $model->get();
+        return response($result, 200);
+    }
+
     public function login(Request $request) {
         Log::debug($request);
         if(strpos($request->email, '@')) {

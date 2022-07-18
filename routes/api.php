@@ -32,7 +32,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [UserController::class, 'logout']);
     Route::get('/searchUser', [UserController::class, 'search']);
     Route::get('/searchCompany', [CompanyController::class, 'search']);
-    Route::get('/filterCompany', [CompanyController::class, 'filterCompany']);
+    Route::get('/filterCompany', [CompanyController::class, 'filter']);
+    Route::get('/filterCourse', [CourseController::class, 'filter']);
+    Route::get('/filterUser', [UserController::class, 'filter']);
     Route::get('/searchCourse', [CourseController::class, 'search']);
     Route::get('/searchSubmission', [SubmissionController::class, 'search']);
     Route::get('/searchNotification', [NotificationController::class, 'search']);
