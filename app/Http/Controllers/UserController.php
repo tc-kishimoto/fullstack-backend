@@ -203,4 +203,11 @@ class UserController extends Controller
             ->get();
         return response($result, 200);
     }
+
+    public function filterCourseUsers($id)
+    {
+        $result = User::whereRaw("exists (select * from belong_course where course_id = ? and user_id = users.id)", [$id])
+        ->get();
+        return response($result, 200);
+    }
 }

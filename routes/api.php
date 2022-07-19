@@ -80,6 +80,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('/submissionComment', [SubmissionController::class, 'commentUpdate']);
     Route::get('/getMySubmissions', [SubmissionController::class, 'getMySubmissions']);
     Route::get('getSubmission/{id}', [SubmissionController::class, 'find']);
+    Route::get('getCourseUsers/{id}', [UserController::class, 'filterCourseUsers']);
 });
 
 Route::post('/login', [UserController::class, 'login']);
